@@ -7,8 +7,8 @@ module.exports = (req, res) => {
   let contentType = content(req.pathName)
   if (req.method === 'GET') {
     fs.readFile('.' + req.pathName, (err, data) => {
-      if (err || !req.pathName.startsWith('/content')) {
-        fs.readFile('./content/page404.html', (err, data) => {
+      if (err || !req.pathName.startsWith('/Server02/content')) {
+        fs.readFile('./Server02/content/page404.html', (err, data) => {
           if (err) console.log(err)
           res.writeHead(404)
           res.write(data)

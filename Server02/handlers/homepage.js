@@ -6,7 +6,7 @@ module.exports = (req, res) => {
   req.pathName = req.pathName || url.parse(req.url).pathname
   let contentType = content(req.pathName)
   if (req.pathName === '/') {
-    fs.readFile('./content/index.html', (err, data) => {
+    fs.readFile('./Server02/content/index.html', (err, data) => {
       if (err) {
         console.log(err)
       } else {
