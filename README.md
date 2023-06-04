@@ -7,6 +7,7 @@ Open the terminal into the cloned directory. <br>
 - npm i
 - npm start <br>
 
+Open http://localhost:5000 to view it in your browser.<br>
 ***Functionlaity*** <br>
 CRUD Rubik's Cubes from DB.<br>
 Search by name and difficuly level from the home page <br>
