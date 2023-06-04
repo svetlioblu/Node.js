@@ -1,4 +1,4 @@
-# node.js
+# Projects
 
 ##Cubicle
 + open the terminal into the directory. To start it type 
