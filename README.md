@@ -1,6 +1,7 @@
 # Projects
 
 ## Cubicle
+*Requires MongoDB local instalation*<br>
 Open the terminal into the cloned directory. <br>
 ***Scripts*** <br>
 - npm i
@@ -8,7 +9,7 @@ Open the terminal into the cloned directory. <br>
 
 ***Functionlaity*** <br>
 CRUD Rubik's Cubes from DB.<br>
-Search by name and dificuly level from the home page <br>
+Search by name and difficuly level from the home page <br>
 Can add accessories to each cube and display current attachments from the details page 
 
 
