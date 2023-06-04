@@ -1,8 +1,8 @@
 # Projects
 
 #Cubicle
-+ open the terminal into the directory. To start it type 
- npm i
- npm start
-+
++ open the terminal into the directory. 
+npm i
+npm start
+
  
