@@ -1,7 +1,7 @@
 # Projects
 
 ## Cubicle
-Open the terminal into the directory. <br>
+Open the terminal into the cloned directory. <br>
 ***Scripts*** <br>
 - npm i
 - npm start <br>
