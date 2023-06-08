@@ -9,7 +9,7 @@ const userController = require('./controllers/userController')
 router.use(homeController)
 router.use('/cubes', cubeController) // will work only for paths, having '/cubes'
 router.use('/accessories', accessoryController)
-router.use('/user', userController)
+router.use('/users', userController)
 
 router.get('*', (req, res) => {
     res.redirect('/404')
