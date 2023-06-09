@@ -10,7 +10,7 @@ router.post('/register', async (req, res) => {
     const { username, password, repeatPassword } = req.body
     await userManager.register({ username, password, repeatPassword })
 
-    res.redirect('users/login')
+    res.redirect('users/loginPage')
 })
 
 router.get('/login',(req,res)=>{
