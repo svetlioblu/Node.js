@@ -8,7 +8,7 @@ const accessoryManager = require('../managers/accessoryManager')
 //render the form create page
 router.get('/create', (req, res) => {
 
-    res.render('create')
+    res.render('cube/create')
 })
 
 //Send the data when the form is submited. The form has action /cubes/create and meth=POST
@@ -36,7 +36,7 @@ router.get('/:cubeId/details', async (req, res) => {
     if (!cube) {
         return res.redirect('/404')
     }
-    res.render('details', { cube })
+    res.render('cube/details', { cube })
 })
 
 // cubeAttachController details page
@@ -59,6 +59,11 @@ router.post('/:cubeId/attach-accessory', async (req, res) => {
     await cubeManager.attachAccessory(cubeId, accessory)
 
     res.redirect(`/cubes/${cubeId}/details`)
+})
+
+router.get('/:cubeId/delete', async (req, res) => {
+    const cube = await cubeManager.getOne(req.params.cubeId).lean()
+    res.render('cube/deleteCubePage', { cube })
 })
 
 module.exports = router
