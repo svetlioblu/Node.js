@@ -34,11 +34,12 @@ router.get('/:cubeId/details', async (req, res) => {
 
     const cube = await cubeManager.getOne(req.params.cubeId).lean()
 
-
     if (!cube) {
         return res.redirect('/404')
     }
-    res.render('cube/details', { cube })
+    const isOwner = cube.owner?.toString() === req.user._id
+
+    res.render('cube/details', { cube, isOwner })
 })
 
 // cubeAttachController details page
@@ -72,7 +73,6 @@ router.get('/:cubeId/delete', async (req, res) => {
 router.post('/:cubeId/delete', async (req, res) => {
     await cubeManager.delete(req.params.cubeId)
     res.redirect('/')
-
 })
 
 router.get('/:cubeId/edit', async (req, res) => {
