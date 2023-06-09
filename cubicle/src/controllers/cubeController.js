@@ -2,6 +2,8 @@ const router = require('express').Router()
 
 const cubeManager = require('../managers/cubeManager')
 const accessoryManager = require('../managers/accessoryManager')
+const { getDifficultyOptionsViewData } = require('../utils/viewHelpers')
+const { get } = require('mongoose')
 
 
 // !the controller in index.js is set to /cubes/create. Main layout a href = /cubes/create
@@ -71,10 +73,11 @@ router.post('/:cubeId/delete', async (req, res) => {
 
 })
 
+
 router.get('/:cubeId/edit', async (req, res) => {
     const cube = await cubeManager.getOne(req.params.cubeId).lean()
-
-    res.render('cube/editCubePage', { cube })
+    const options = getDifficultyOptionsViewData(cube.difficultyLevel)
+    res.render('cube/editCubePage', { cube, options })
 })
 router.post('/:cubeId/edit', async (req, res) => {
     const { name, description, imageUrl, difficultyLevel } = req.body
