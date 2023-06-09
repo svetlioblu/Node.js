@@ -30,6 +30,9 @@ exports.create = async (cubeData) => {
     await cube.save()
     return cube
 }
+
+exports.update = (cubeId, cubeData) => Cube.findByIdAndUpdate(cubeId, cubeData  )
+
 exports.delete = (cubeId) => Cube.findByIdAndDelete(cubeId)
 
 exports.attachAccessory = async (cubeId, accessoryId) => {

@@ -76,5 +76,9 @@ router.get('/:cubeId/edit', async (req, res) => {
 
     res.render('cube/editCubePage', { cube })
 })
-
+router.post('/:cubeId/edit', async (req, res) => {
+    const { name, description, imageUrl, difficultyLevel } = req.body
+    await cubeManager.update(req.params.cubeId, { name, description, imageUrl, difficultyLevel })
+    res.redirect(`/cubes/${req.params.cubeId}/details`)
+})
 module.exports = router
