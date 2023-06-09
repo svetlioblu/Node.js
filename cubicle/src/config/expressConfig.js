@@ -1,5 +1,6 @@
 const express = require('express')
 const cookieParser = require('cookie-parser')
+const { auth } = require('../middlewears/authMiddlewear')
 
 function expressConfig(app) {
     //express config to get static files
@@ -8,5 +9,7 @@ function expressConfig(app) {
     app.use(express.urlencoded({ extended: false }))
     // adding cookies feature 
     app.use(cookieParser())
+
+    app.use(auth)
 }
 module.exports = expressConfig

@@ -4,6 +4,6 @@ const { promisify } = require('util')
 
 const jwt = {
     sign: promisify(jsonwebtoken.sign),
-    veify: promisify(jsonwebtoken.verify)
+    verify: promisify(jsonwebtoken.verify)
 }
 module.exports = jwt

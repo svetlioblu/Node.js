@@ -7,6 +7,7 @@ const accessoryManager = require('../managers/accessoryManager')
 // !the controller in index.js is set to /cubes/create. Main layout a href = /cubes/create
 //render the form create page
 router.get('/create', (req, res) => {
+    
     res.render('create')
 })
 
