@@ -9,9 +9,13 @@ exports.auth = async (req, res, next) => {
         //validate token
         try {
             //verify checks the the expiration too
-            const user = await jwt.verify(token, SECRET)
+            const decodedUser = await jwt.verify(token, SECRET)
             //save the info from the token to request
-            req.user = user
+            req.user = decodedUser
+            res.locals.user = decodedUser
+            //res.locals provide varibeles for both req/res and can be acsessed fro mthe views
+            res.locals.isAuthenticated = true
+
             next()
 
         } catch (err) {
