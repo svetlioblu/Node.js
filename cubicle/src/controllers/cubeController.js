@@ -3,18 +3,19 @@ const router = require('express').Router()
 const cubeManager = require('../managers/cubeManager')
 const accessoryManager = require('../managers/accessoryManager')
 const { getDifficultyOptionsViewData } = require('../utils/viewHelpers')
+const { isAuth } = require('../middlewears/authMiddlewear')
 const { get } = require('mongoose')
 
 
 // !the controller in index.js is set to /cubes/create. Main layout a href = /cubes/create
 //render the form create page
-router.get('/create', (req, res) => {
+router.get('/create', isAuth, (req, res) => {
 
     res.render('cube/create')
 })
 
 //Send the data when the form is submited. The form has action /cubes/create and meth=POST
-router.post('/create', async (req, res) => {
+router.post('/create', isAuth, async (req, res) => {
 
     // req.body have the parced data to object due to the express middleware bodyparser config
     const { name, description, imageUrl, difficultyLevel } = req.body
@@ -77,6 +78,10 @@ router.post('/:cubeId/delete', async (req, res) => {
 
 router.get('/:cubeId/edit', async (req, res) => {
     const cube = await cubeManager.getOne(req.params.cubeId).lean()
+    //additional deffence if use postman
+    if(cube.owner.toString() !== req.user._id){
+        return res.redirect('/404')
+    }
     const options = getDifficultyOptionsViewData(cube.difficultyLevel)
     res.render('cube/editCubePage', { cube, options })
 })
