@@ -6,10 +6,20 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         minLength: 5,
-        match: /^[A-Za-z0-9]+$/,
+        match: [/^[A-Za-z0-9]+$/, 'Username must be alphanumeric'],
         unique: true
     },
-    password: String
+    password: {
+        type: String,
+        required: true,
+        minLength: 8,
+        validate: {
+            validator: function (value) {
+                return /^[A-Za-z0-9]+$/.test(value)
+            },
+            message: `Invalid password characters!`
+        }
+    }
 })
 // Model based validation. repeatPassword is passed as arg.Work with
 //function declaration because of 'this'
@@ -25,7 +35,7 @@ userSchema.pre('save', async function () {
 
     this.password = hash
 })
-//TODO if user already exists
+
 
 const User = mongoose.model('User', userSchema)
 
