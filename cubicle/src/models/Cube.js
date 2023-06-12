@@ -5,7 +5,7 @@ const cubeSchema = new mongoose.Schema({
     description: String,
     imageUrl: String,
     difficultyLevel: Number,
-    //relation
+    //relations
     accessories: [{
         type: mongoose.Types.ObjectId,
         ref: 'Accessory'

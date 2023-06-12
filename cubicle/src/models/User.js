@@ -2,7 +2,13 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
-    username: String,
+    username: {
+        type: String,
+        required: true,
+        minLength: 5,
+        match: /^[A-Za-z0-9]+$/,
+        unique: true
+    },
     password: String
 })
 // Model based validation. repeatPassword is passed as arg.Work with
