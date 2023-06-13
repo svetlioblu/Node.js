@@ -38,8 +38,7 @@ router.post('/login', async (req, res) => {
     } catch (err) {
         const errorMessages = [err.message]
         console.log(errorMessages)
-        res.status(404).render('user/loginPage', {errorMessages})
-        
+        res.status(404).render('user/loginPage', { errorMessages })
     }
 
 })

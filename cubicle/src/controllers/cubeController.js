@@ -4,6 +4,7 @@ const cubeManager = require('../managers/cubeManager')
 const accessoryManager = require('../managers/accessoryManager')
 const { getDifficultyOptionsViewData } = require('../utils/viewHelpers')
 const { isAuth } = require('../middlewears/authMiddlewear')
+const { extractErrorMessages } = require('../utils/errorHelpers')
 const { get } = require('mongoose')
 
 
@@ -20,15 +21,21 @@ router.post('/create', isAuth, async (req, res) => {
     // req.body have the parced data to object due to the express middleware bodyparser config
     const { name, description, imageUrl, difficultyLevel } = req.body
     //The idea of destructoring is to have validation ...
-    await cubeManager.create({
-        name,
-        description,
-        imageUrl,
-        difficultyLevel: Number(difficultyLevel),
-        owner: req.user._id
-    })
+    try {
+        await cubeManager.create({
+            name,
+            description,
+            imageUrl,
+            difficultyLevel: Number(difficultyLevel),
+            owner: req.user._id
+        })
+        res.redirect('/')
 
-    res.redirect('/')
+    } catch (err) {
+        const errorMessages = extractErrorMessages(err)
+        res.status(404).render('cube/create', { errorMessages })
+    }
+
 })
 
 router.get('/:cubeId/details', async (req, res) => {
@@ -79,7 +86,7 @@ router.post('/:cubeId/delete', async (req, res) => {
 router.get('/:cubeId/edit', async (req, res) => {
     const cube = await cubeManager.getOne(req.params.cubeId).lean()
     //additional deffence if use postman
-    if(cube.owner.toString() !== req.user._id){
+    if (cube.owner.toString() !== req.user._id) {
         return res.redirect('/404')
     }
     const options = getDifficultyOptionsViewData(cube.difficultyLevel)
