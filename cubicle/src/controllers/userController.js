@@ -9,9 +9,15 @@ router.get('/register', (req, res) => {
 
 router.post('/register', async (req, res) => {
     const { username, password, repeatPassword } = req.body
-    await userManager.register({ username, password, repeatPassword })
+    try {
+        await userManager.register({ username, password, repeatPassword })
+        res.redirect('/users/login')
+    } catch (err) {
+        //res.status(400).send(err.message)
+        res.status(404).render('user/registerPage', { errorMessage: err.message })
 
-    res.redirect('/users/login')
+    }
+
 })
 
 router.get('/login', (req, res) => {
@@ -28,7 +34,7 @@ router.post('/login', async (req, res) => {
 
 router.get('/logout', (req, res) => {
     res.clearCookie('auth')
-    
+
     res.redirect('/')
 })
 
