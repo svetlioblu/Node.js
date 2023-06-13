@@ -5,28 +5,23 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: [true, 'UserName is Required !'],
-        minLength: 5,
+        minLength: [5, 'The name should be at least 5 chars! '],
         match: [/^[A-Za-z0-9]+$/, 'Username must be alphanumeric'],
         unique: true
     },
     password: {
         type: String,
-        required: true,
-        minLength: 8,
-        validate: {
-            validator: function (value) {
-                return /^[A-Za-z0-9]+$/.test(value)
-            },
-            message: `Invalid password characters!`
-        }
+        required: [true, 'Password is Required !'],
+        minLength: [8, 'The password should be at least 8 chars! '],
+        match: [/^[A-Za-z0-9]+$/, 'Password must be alphanumeric'],
     }
 })
 // Model based validation. repeatPassword is passed as arg.Work with
 //function declaration because of 'this'
 userSchema.virtual('repeatPassword')
-    .set(function (value) {
+    .set(function(value) {
         if (value !== this.password) {
-            throw new mongoose.MongooseError('Password Missmatch!!! ')
+            throw new Error('Password Missmatch!!! ')
         }
     })
 

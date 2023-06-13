@@ -4,7 +4,8 @@ const jwt = require('../lib/jwt')
 
 const { SECRET } = require('../config/config')
 
-exports.register = (userData) => User.create(userData)
+exports.register = (userData) => User.create(userData)    
+
 
 exports.login = async (username, password) => {
     //find user
