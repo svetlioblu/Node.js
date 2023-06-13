@@ -14,8 +14,11 @@ router.post('/register', async (req, res) => {
         res.redirect('/users/login')
     } catch (err) {
         //res.status(400).send(err.message)
-        res.status(404).render('user/registerPage', { errorMessage: err.message })
+        //res.status(404).render('user/registerPage', { errorMessage: err.message })
+        //const firstErrorMsg =Object.values(err.errors)[0].message
+        const errorMessages = Object.values(err.errors).map(x => x.message)
 
+        res.status(404).render('user/registerPage', { errorMessage: errorMessages })
     }
 
 })
