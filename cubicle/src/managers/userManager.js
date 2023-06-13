@@ -4,28 +4,34 @@ const jwt = require('../lib/jwt')
 
 const { SECRET } = require('../config/config')
 
-exports.register = (userData) => User.create(userData)    
+exports.register = (userData) => User.create(userData)
 
 
 exports.login = async (username, password) => {
+
     //find user
     const user = await User.findOne({ username })
 
     if (!user) {
         throw new Error('Cannot find username OR password !')
+
     }
     //validate password
     const isValid = await bcrypt.compare(password, user.password)
 
     if (!isValid) {
-        throw new Error('Cannot find username OR password !')
+        throw new Error('Cannot find username OR password !!!')
     }
+
     // create token
     const payload = {
         _id: user._id,
         username: user.username
     }
     const token = await jwt.sign(payload, SECRET, { expiresIn: '2d' })
-
+    if (!token) {
+        throw new Error('The token is invalid !')
+    }
     return token
+
 }
