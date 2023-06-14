@@ -5,15 +5,17 @@ const routes = require('./routes')
 
 //config express
 const app = express()
-app.use(express.static('assets'))
-app.use(express.urlencoded({ extended: false }))
+
 // config handlebars
 app.engine('hbs', handlebars.engine({
     extname: 'hbs'
 }))
 app.set('view engine', 'hbs')
 app.set('views', 'src/views')
-//config routes 
+
+//config middlewears
+app.use(express.static('src/assets'))
+app.use(express.urlencoded({ extended: false }))
 app.use(routes)
 
 
