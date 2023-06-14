@@ -1,10 +1,16 @@
 const express = require('express')
 const handlebars = require('express-handlebars')
+const mongoose = require('mongoose')
 
 const routes = require('./routes')
 
 //config express
 const app = express()
+
+//config mongoose(change db name)
+mongoose.connect('mongodb://127.0.0.1:27017/petstagram')
+    .then(() => { console.log('DB connected successfuly!') })
+    .catch(err => console.log('DB error: ', err.message))
 
 // config handlebars
 app.engine('hbs', handlebars.engine({
