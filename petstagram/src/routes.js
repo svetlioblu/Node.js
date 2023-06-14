@@ -9,7 +9,4 @@ router.use(homeController)
 router.use('/users',userController)
 
 
-
-
-
 module.exports = router
