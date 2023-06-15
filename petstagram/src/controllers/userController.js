@@ -8,8 +8,8 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
     const { username, password } = req.body
     const token = await userService.login(username, password)
-    res.cookie('auth', token)
-    
+    res.cookie('auth', token, { httpOnly: true })
+
     res.redirect('/')
 })
 
@@ -21,6 +21,11 @@ router.post('/register', async (req, res) => {
     const { username, email, password, repeatPassword } = req.body
     await userService.register({ username, email, password, repeatPassword })
 
+    res.redirect('/')
+})
+
+router.get('/logout', (req, res) => {
+    res.clearCookie('auth')
     res.redirect('/')
 })
 
