@@ -1,6 +1,7 @@
 const express = require('express')
 const handlebars = require('express-handlebars')
 const mongoose = require('mongoose')
+const cookieParser = require('cookie-parser')
 
 const routes = require('./routes')
 
@@ -22,6 +23,7 @@ app.set('views', 'src/views')
 //config middlewears
 app.use(express.static('src/assets'))
 app.use(express.urlencoded({ extended: false }))
+app.use(cookieParser())
 app.use(routes)
 
 
