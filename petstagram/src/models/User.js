@@ -18,12 +18,12 @@ const userSchema = new mongoose.Schema({
 })
 
 userSchema.virtual('repeatPassword')
-    .set(function(value) {
+    .set(function (value) {
         if (this.password !== value) {
             throw new Error('Password missmatch!')
         }
     })
-userSchema.pre('save', async function() {
+userSchema.pre('save', async function () {
     const hash = await bcrypt.hash(this.password, 10)
     this.password = hash
 })
