@@ -1,7 +1,10 @@
 const express = require('express')
 const handlebars = require('express-handlebars')
 const mongoose = require('mongoose')
+
+// available across the app
 const cookieParser = require('cookie-parser')
+const { auth } = require('./middlewears/authMiddlewear')
 
 const routes = require('./routes')
 
@@ -23,7 +26,8 @@ app.set('views', 'src/views')
 //config middlewears
 app.use(express.static('src/assets'))
 app.use(express.urlencoded({ extended: false }))
-app.use(cookieParser())
+app.use(cookieParser()) //! auth after cookie-parser
+app.use(auth)
 app.use(routes)
 
 
