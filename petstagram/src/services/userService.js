@@ -1,9 +1,9 @@
 const User = require('../models/User')
 
 exports.login = (username, password) => {
-    User.create()
+    // const user = User.findOne({ username: username })
 }
 
 exports.register = (userRegisterData) => {
-
+    User.create(userRegisterData)
 }
