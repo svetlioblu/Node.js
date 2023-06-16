@@ -1,6 +1,7 @@
 const router = require('express').Router()
 
 const userService = require('../services/userService')
+const { getErrorMessage } = require('../utils/errorHelpers')
 
 router.get('/login', (req, res) => {
     res.render('users/login')
@@ -19,9 +20,14 @@ router.get('/register', (req, res) => {
 })
 router.post('/register', async (req, res) => {
     const { username, email, password, repeatPassword } = req.body
-    await userService.register({ username, email, password, repeatPassword })
+    try {
+        await userService.register({ username, email, password, repeatPassword })
+        res.redirect('/')
+    } catch (err) {
 
-    res.redirect('/')
+        res.render('/users/register', { error: getErrorMessage(err) })
+    }
+
 })
 
 router.get('/logout', (req, res) => {
