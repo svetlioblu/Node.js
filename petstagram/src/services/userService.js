@@ -1,11 +1,11 @@
 const User = require('../models/User')
 const bcrypt = require('bcrypt')
-const jsonWebToken = require('../lib/jwt')
-const { secret } = require('../lib/secret')
+
+const { generateToken } = require('../lib/generateToken')
 
 exports.login = async (username, password) => {
     const user = await User.findOne({ username })
-
+   
     if (!user) {
         throw new Error('Innvalid user or password!')
     }
@@ -14,20 +14,17 @@ exports.login = async (username, password) => {
         throw new Error('Innvalid user or password!!')
     }
 
-    const payload = {
-        _id: user._id,
-        username: user.username,
-        email: user.email
-    }
-    const token = await jsonWebToken.sign(payload, secret, { expiresIn: '2d' })
-    return token
+    return generateToken(user)
 }
 
 exports.register = async (userRegisterData) => {
-    const user = await User.findOne({ username: userRegisterData.username })
-    if (user) {
+    
+    const isExistingUser = await User.findOne({ username: userRegisterData.username })
+    if (isExistingUser) {
         throw new Error('Username already Exists !')
     }
+    //automatic login on register
+   const user= await User.create(userRegisterData)
 
-    return User.create(userRegisterData)
+    return generateToken(user)
 }

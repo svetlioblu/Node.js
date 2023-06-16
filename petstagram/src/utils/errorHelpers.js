@@ -6,5 +6,4 @@ exports.getErrorMessage = (err) => {
     } else {
         return err.message
     }
-
 }

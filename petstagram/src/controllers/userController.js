@@ -14,6 +14,7 @@ router.post('/login', async (req, res) => {
 
         res.redirect('/')
     } catch (err) {
+
         res.render('users/login', { error: getErrorMessage(err) })
     }
 })
@@ -25,8 +26,10 @@ router.get('/register', (req, res) => {
 router.post('/register', async (req, res) => {
     const { username, email, password, repeatPassword } = req.body
     try {
-        await userService.register({ username, email, password, repeatPassword })
+        const token = await userService.register({ username, email, password, repeatPassword })
+        res.cookie('auth', token, { httpOnly: true })
         res.redirect('/')
+
     } catch (err) {
 
         res.render('users/register', { error: getErrorMessage(err) })
