@@ -39,19 +39,7 @@
                                 <i>Catalog</i>
                             </a>
                         </li>
-
-                        <!--For Guest User-->
-                        <li class="nav-item">
-                            <a href="/users/login">
-                                <i>Login</i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/users/register">
-                                <i>Register</i>
-                            </a>
-                        </li>
-
+                        {{#if isAuthenticated}}
                         <!--For login users-->
                         <li class="nav-item">
                             <a href="#">
@@ -70,6 +58,19 @@
                                 <i>Logout</i>
                             </a>
                         </li>
+                        {{else}}
+                        <!--For Guest User-->
+                        <li class="nav-item">
+                            <a href="/users/login">
+                                <i>Login</i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/users/register">
+                                <i>Register</i>
+                            </a>
+                        </li>
+                        {{/if}}
                     </ul>
                 </div>
             </div>
