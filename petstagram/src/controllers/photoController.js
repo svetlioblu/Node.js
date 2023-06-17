@@ -5,6 +5,7 @@ const { getErrorMessage } = require('../utils/errorHelpers')
 router.get('/create', (req, res) => {
     res.render('photos/create')
 })
+
 router.post('/create', async (req, res) => {
     const photoCreateData = {
         ...req.body,

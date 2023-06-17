@@ -7,4 +7,11 @@ router.get('/catalog', async (req, res) => {
     res.render('photos/catalog', { cards })
 })
 
+router.get('/catalog/:name/:cardId', async (req, res) => {
+    const cardId = req.params.cardId
+    const oneCard = await catalogService.getOne(cardId).lean()
+
+    res.render('photos/details', { oneCard })
+})
+
 module.exports = router
