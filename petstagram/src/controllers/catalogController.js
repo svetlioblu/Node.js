@@ -19,9 +19,29 @@ router.get('/catalog/:name/:cardId', async (req, res) => {
     }
 
 })
-router.get('/catalog/:name/:cardId/edit', (req, res) => {
-    res.render('photos/edit')
+router.get('/catalog/:name/:cardId/edit', async (req, res) => {
+    const cardId = req.params.cardId
+    try {
+        const oneCard = await catalogService.getOne(cardId).lean()
+
+        res.render('photos/edit', { oneCard })
+    } catch (err) {
+        res.render('photos/details', { oneCard, error: getErrorMessage(err) })
+    }
+
 })
+
+router.post('/catalog/:name/:cardId/edit', async (req, res) => {
+    const editedData = req.body
+    const cardId = req.params.cardId
+    try {
+        await catalogService.edit(cardId, editedData)
+        res.redirect('/catalog')
+    } catch (err) {
+
+    }
+})
+
 
 router.get('/catalog/:name/:cardId/delete', async (req, res) => {
     const cardId = req.params.cardId

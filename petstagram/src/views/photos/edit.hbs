@@ -3,27 +3,27 @@
     <div class="editPage">
         <h2>Edit photo</h2>
         <!-- Start Add Photo Form -->
-        <form action="">
+        <form method="POST">
             <p>
-                <input type="text" name="" placeholder="Name" value="Sal">
+                <input type="text" name="name" placeholder="Name" value="{{oneCard.name}}">
             </p>
 
             <p>
-                <input type="number" name="" placeholder="Age" value="4">
+                <input type="number" name="age" placeholder="Age" value="{{oneCard.age}}">
             </p>
 
             <p>
-                <textarea type="text" name="" placeholder="Description">This is my pet!</textarea>
+                <textarea type="text" name="description" placeholder="Description">{{oneCard.description}}</textarea>
             </p>
 
             <p>
-                <input type="text" name="" placeholder="Location" value="Bansko, Bulgaria">
+                <input type="text" name="location" placeholder="Location" value="{{oneCard.location}}">
             </p>
 
             <p>
-                <input type="text" name="" placeholder="Link to image" value="/static/images/axolotl.jpeg">
+                <input type="text" name="image" placeholder="Link to image" value="{{oneCard.image}}">
             </p>
-            <!-- Add Photo Button -->
+          
             <button class="edit-btn" type="submit">Edit Photo</button>
         </form>
     </div>

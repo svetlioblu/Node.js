@@ -8,4 +8,10 @@ exports.getOne = (cardId) => {
     return Photo.findById(cardId).populate('owner')
 }
 
-exports.delete = (cardId) => Photo.findByIdAndDelete(cardId)
+exports.edit = (cardId, editData) => {
+    return Photo.findByIdAndUpdate(cardId, editData)
+}
+
+exports.delete = (cardId) => {
+    return Photo.findByIdAndDelete(cardId)
+}
