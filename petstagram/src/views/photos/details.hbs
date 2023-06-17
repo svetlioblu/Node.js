@@ -28,7 +28,6 @@
                             <!-- photo's location -->
                             <span>{{oneCard.location}}</span>
 
-                            <!-- IF the viewer is the creator of the photo -->
                             {{#if isOwner}}
                             <div class="edit-delete-btns">
 
@@ -38,7 +37,7 @@
                                 </a>
 
                                 <!--Delete Pet Photo -->
-                                <a href="#">
+                                <a href="/catalog/{{oneCard.name}}/{{oneCard._id}}/delete">
                                     <img class="bin-img" src="/images/icon-remove-22.jpg" alt="bin button">
                                 </a>
                             </div>
@@ -115,6 +114,8 @@
                         </div>
                     </div>
                 </div>
+                {{#if isAuthenticated}}
+      {{!-- use unless if the owner shouldnt be able to add comment --}}
                 <div class="addComments">
                     <!-- Start Add Comments Form -->
                     <form method="#" action="#">
@@ -124,6 +125,8 @@
                         <button type="submit">Post</button>
                     </form>
                 </div>
+                {{/if}}
+                
             </div>
         </div>
     </div>
