@@ -1,9 +1,10 @@
 const router = require('express').Router()
-const catalogservice = require('../services/catalogService')
+const catalogService = require('../services/catalogService')
 
-router.get('/catalog', (req, res) => {
+router.get('/catalog', async (req, res) => {
+    const cards = await catalogService.getAll().lean()
 
-    res.render('photos/catalog')
+    res.render('photos/catalog', { cards })
 })
 
 module.exports = router
