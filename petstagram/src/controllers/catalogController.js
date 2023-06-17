@@ -4,8 +4,7 @@ const { getErrorMessage } = require('../utils/errorHelpers')
 
 router.get('/catalog', async (req, res) => {
     const cards = await catalogService.getAll().lean()
-    //TODO to show details in catalog for logged in user
-
+    //TODO to show details in catalog for logged in user only
     res.render('photos/catalog', { cards })
 })
 
@@ -20,6 +19,9 @@ router.get('/catalog/:name/:cardId', async (req, res) => {
     }
 
 })
+router.get('/catalog/:name/:cardId/edit', (req, res) => {
+    res.render('photos/edit')
+})
 
 router.get('/catalog/:name/:cardId/delete', async (req, res) => {
     const cardId = req.params.cardId
@@ -27,7 +29,9 @@ router.get('/catalog/:name/:cardId/delete', async (req, res) => {
         await catalogService.delete(cardId)
         res.redirect('/catalog')
     } catch (err) {
-        res.render('photos/details', { error: 'Unsuccessful deleteion' })
+        const oneCard = await catalogService.getOne(cardId).lean()
+        const isOwner = req.user?._id == oneCard.owner._id
+        res.render('photos/details', { oneCard, isOwner, error: 'Unsuccessful deleteion' })
     }
 
 })
