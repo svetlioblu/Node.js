@@ -5,7 +5,10 @@ router.get('/create', (req, res) => {
     res.render('photos/create')
 })
 router.post('/create', async (req, res) => {
-    const photoCreateData = req.body
+    const photoCreateData = {
+        ...req.body,
+        owner:req.user._id
+    }
     try {
         await photoService.create(photoCreateData)
         res.redirect('/catalog')
