@@ -5,5 +5,5 @@ exports.getAll = () => {
 }
 
 exports.getOne = (cardId) => {
-    return Photo.findById(cardId)
+    return Photo.findById(cardId).populate('owner')
 }

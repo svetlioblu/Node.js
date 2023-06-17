@@ -23,11 +23,10 @@
 
                             <!-- Link to User Profile Details Page -->
                             <p>
-                                <!-- User's username -->
-                                MayaM
+                                {{oneCard.owner.username}}
                             </p>
                             <!-- photo's location -->
-                            <span>Bansko, Bulgaria</span>
+                            <span>{{oneCard.location}}</span>
 
                             <!-- IF the viewer is the creator of the photo -->
                             <div class="edit-delete-btns">
@@ -51,23 +50,20 @@
                 <!-- Start Pet Photo -->
                 <div class="imgBx">
                     <!-- Pet Photo -->
-                    <img src="/static/images/axolotl.jpeg" alt="post" class="cover">
+                    <img src="{{oneCard.image}}" alt="{{oneCard.name}}" class="cover">
                 </div>
-
-
 
                 <div class="bottom">
 
                     <p class="message">
-                        <b class="petDescription">This is my pet!</b>
+                        <b class="petDescription">{{oneCard.description}}</b>
                     </p>
-
-
                     <!-- Photo description -->
                     <div class="pet-details">
-                        <p class="petName">Name: Sal</p>
-                        <p class="petAge">Age: 4</p>
+                        <p class="petName">Name: {{oneCard.name}}</p>
+                        <p class="petAge">Age: {{oneCard.age}}</p>
                     </div>
+                    {{!-- comments --}}
                     <div class="comments">
                         <div class="comments-top">
                             <div class="userDetails">
