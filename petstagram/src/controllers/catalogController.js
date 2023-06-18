@@ -11,7 +11,7 @@ router.get('/catalog', async (req, res) => {
 router.get('/catalog/:name/:cardId', async (req, res) => {
     const cardId = req.params.cardId
     try {
-        const oneCard = await catalogService.getOne(cardId).lean()
+        const oneCard = await catalogService.getOne(cardId).populate('comments.user').lean()
         const isOwner = req.user?._id == oneCard.owner._id
         res.render('photos/details', { oneCard, isOwner })
     } catch (err) {
@@ -61,10 +61,10 @@ router.post('/catalog/:cardName/:cardId/comments', async (req, res) => {
 
     const { cardName, cardId } = req.params
     const { message } = req.body
-    const userId = req.user._id
+    const user = req.user._id
 
     try {
-        await catalogService.addComment(cardId, { userId, message })
+        await catalogService.addComment(cardId, { user, message })
         res.redirect(`/catalog/${cardName}/${cardId}`)
     } catch (err) {
         res.render('photos/details', { error: 'Unsuccessful Comment post!' })
