@@ -39,9 +39,6 @@ router.get('/dashboard/:animalId/details', async (req, res) => {
         const isOwner = req.user?._id == oneAnimal.owner._id
         const isNotOwner = req.user?._id != oneAnimal.owner._id
 
-
-        //console.log(oneAnimal.owner._id)
-
         res.render('details', { oneAnimal, isOwner, isNotOwner })
     } catch (err) {
         res.render('details', { error: getErrorMessage(err) })
