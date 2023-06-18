@@ -72,4 +72,17 @@ router.post('/catalog/:cardName/:cardId/comments', async (req, res) => {
 
 })
 
+router.get('/users/profile', async (req, res) => {
+    const userId = req.user._id
+    try {
+        const userPosts = await catalogService.getOneUserCards(userId).lean()
+
+        res.render('users/profile', { userPosts, photoCount: userPosts.length })
+    } catch (err) {
+        res.render('users/profile', { error: 'Unsuccessful Own posts Load!' })
+    }
+
+})
+
+
 module.exports = router

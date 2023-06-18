@@ -23,3 +23,7 @@ exports.addComment = async (cardId, commentData) => {
     //after push needs save
     return card.save()
 }
+
+exports.getOneUserCards = (userId) => {
+    return Photo.find({ owner: userId })
+}
