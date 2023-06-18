@@ -115,18 +115,18 @@
                     </div>
                 </div>
                 {{#if isAuthenticated}}
-      {{!-- use unless if the owner shouldnt be able to add comment --}}
+                {{!-- use unless if the owner shouldnt be able to add comment --}}
                 <div class="addComments">
                     <!-- Start Add Comments Form -->
-                    <form method="#" action="#">
-                        <textarea id="comment-textarea" name="" cols="40" rows="10"
+                    <form method="POST" action="/catalog/{{oneCard.name}}/{{oneCard._id}}/comments">
+                        <textarea id="comment-textarea" name="message" cols="40" rows="10"
                             placeholder="Add comment..."></textarea>
                         <!-- Post Comments Button -->
                         <button type="submit">Post</button>
                     </form>
                 </div>
                 {{/if}}
-                
+
             </div>
         </div>
     </div>

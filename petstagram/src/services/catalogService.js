@@ -15,3 +15,11 @@ exports.edit = (cardId, editData) => {
 exports.delete = (cardId) => {
     return Photo.findByIdAndDelete(cardId)
 }
+
+exports.addComment = async (cardId, commentData) => {
+    const card = await Photo.findById(cardId)
+
+    card.comments.push(commentData)
+    //after push needs save
+    return card.save()
+}

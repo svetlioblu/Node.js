@@ -26,22 +26,23 @@ router.get('/catalog/:name/:cardId/edit', async (req, res) => {
 
         res.render('photos/edit', { oneCard })
     } catch (err) {
-        res.render('photos/details', { oneCard, error: getErrorMessage(err) })
+        res.render('photos/edit', { error: getErrorMessage(err) })
     }
 
 })
 
 router.post('/catalog/:name/:cardId/edit', async (req, res) => {
     const editedData = req.body
+    const cardName = req.params.name
     const cardId = req.params.cardId
     try {
         await catalogService.edit(cardId, editedData)
-        res.redirect('/catalog')
+        res.redirect(`/catalog/${cardName}/${cardId}`)
     } catch (err) {
 
+        res.render('photos/edit', { error: getErrorMessage(err) })
     }
 })
-
 
 router.get('/catalog/:name/:cardId/delete', async (req, res) => {
     const cardId = req.params.cardId
@@ -55,4 +56,20 @@ router.get('/catalog/:name/:cardId/delete', async (req, res) => {
     }
 
 })
+
+router.post('/catalog/:cardName/:cardId/comments', async (req, res) => {
+
+    const { cardName, cardId } = req.params
+    const { message } = req.body
+    const userId = req.user._id
+   
+    try {
+        await catalogService.addComment(cardId, { userId, message })
+        res.redirect(`/catalog/${cardName}/${cardId}`)
+    } catch (err) {
+console.log(err.message)
+    }
+
+})
+
 module.exports = router

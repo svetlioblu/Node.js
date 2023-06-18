@@ -21,6 +21,18 @@ const photoSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Location is required !']
     },
+    comments: [
+        {
+            userId: {
+                type: mongoose.Types.ObjectId,
+                required: true
+            },
+            message: {
+                type: String,
+                required: [true, 'comment message is required!']
+            }
+        }
+    ],
     owner: {
         type: mongoose.Types.ObjectId,
         ref: 'User'
