@@ -3,15 +3,20 @@ const mongoose = require('mongoose')
 const photoSchema = new mongoose.Schema({
     name: {
         type: String,
+        minLength:[3,'The name should be at least 3 chars long !'],
         required: [true, 'Name is required !']
     },
     image: {
         type: String,
-        required: [true, 'Image link is required !']
+        required: [true, 'Image link is required !'],
+        match:[/^https?:\/\//,'The image URL is not in correct format!']
     },
     age: {
         type: Number,
+        min:1,
+        max:40,
         required: [true, 'Age is required !']
+ 
     },
     description: {
         type: String,
