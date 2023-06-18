@@ -37,7 +37,6 @@ router.get('/dashboard/:animalId/details', async (req, res) => {
         const oneAnimal = await animalService.getOne(animalId).populate('donations.user').lean()
 
         const isOwner = req.user?._id == oneAnimal.owner._id
-        console.log(isOwner);
         const isNotOwner = req.user?._id != oneAnimal.owner._id
 
         res.render('details', { oneAnimal, isOwner, isNotOwner })
@@ -61,7 +60,7 @@ router.get('/dashboard/:animalId/edit', isAuth, async (req, res) => {
 // POST EDIT
 router.post('/dashboard/:animalId/edit', isAuth, async (req, res) => {
     const editedData = req.body
-    
+
     const animalId = req.params.animalId
     try {
         await animalService.edit(animalId, editedData)
