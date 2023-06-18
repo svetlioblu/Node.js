@@ -12,8 +12,8 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\petstagram\\src\\index.js",
-            "cwd": "${workspaceFolder}\\petstagram"
+            "program": "${workspaceFolder}\\examApp\\src\\index.js",
+            "cwd": "${workspaceFolder}\\examApp"
         }
     ]
 }

@@ -12,7 +12,7 @@ const routes = require('./routes')
 const app = express()
 
 //config mongoose(change db name)
-mongoose.connect('mongodb://127.0.0.1:27017/petstagram')
+mongoose.connect('mongodb://127.0.0.1:27017/FriendlyWorld')
     .then(() => { console.log('DB connected successfuly!') })
     .catch(err => console.log('DB error: ', err.message))
 
@@ -31,4 +31,4 @@ app.use(auth)
 app.use(routes)
 
 
-app.listen(5000, () => { console.log('The server listening on port 5000...') })
+app.listen(3000, () => { console.log('The server listening on port 3000...') })
