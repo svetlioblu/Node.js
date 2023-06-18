@@ -25,7 +25,8 @@ exports.register = async (userRegisterData) => {
         throw new Error('UserEmail already Exists !')
     }
     //automatic login on register
+    
    const user= await User.create(userRegisterData)
-
+   
     return generateToken(user)
 }

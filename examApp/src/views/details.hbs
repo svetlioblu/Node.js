@@ -1,0 +1,48 @@
+<main class="details">
+    <!-- Details page -->
+    <section id="details">
+        <div id="details-wrapper">
+            <p id="details-title">Name:{{oneAnimal.name}}</p>
+            <div id="img-wrapper">
+                <img src="{{oneAnimal.image}}" />
+            </div>
+            <div id="info-wrapper">
+                <table>
+                    <tr>
+                        <td>
+                            <p>
+                                Years: <span id="details-years">{{oneAnimal.years}}</span>
+                            </p>
+                        </td>
+                        <td>
+                            <p>Kind: <span id="details-kind">{{oneAnimal.kind}}</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Need of: <span id="details-need">M{{oneAnimal.need}}</span></p>
+                        </td>
+                        <td>
+                            <p>Location: <span id="details-location">{{oneAnimal.location}}</span></p>
+                        </td>
+                    </tr>
+                </table>
+                <p>Description: <span id="details-description">{{oneAnimal.description}}</span></p>
+            </div>
+
+            <!--Edit and Delete are only for creator-->
+            {{#if isOwner}}
+            <div id="action-buttons">
+                <a href="/dashboard/{{oneAnimal._id}}/edit" id="edit-btn">Edit</a>
+                <a href="#" id="delete-btn">Delete</a>
+                {{/if}}
+                {{#if isAuthenticated}}
+                {{#if isNotOwner}}
+                <a href="#" id="donation-btn">Donation</a>
+                <p id="already-donated">You already donated!</p>
+                {{/if}}
+                {{/if}}
+            </div>
+        </div>
+    </section>
+</main>
