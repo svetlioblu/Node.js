@@ -20,7 +20,7 @@ router.get('/catalog/:name/:cardId', async (req, res) => {
     }
 
 })
-router.get('/catalog/:name/:cardId/edit', async (req, res) => {
+router.get('/catalog/:name/:cardId/edit', isAuth, async (req, res) => {
     const cardId = req.params.cardId
     try {
         const oneCard = await catalogService.getOne(cardId).lean()
@@ -32,7 +32,7 @@ router.get('/catalog/:name/:cardId/edit', async (req, res) => {
 
 })
 
-router.post('/catalog/:name/:cardId/edit', async (req, res) => {
+router.post('/catalog/:name/:cardId/edit', isAuth, async (req, res) => {
     const editedData = req.body
     const cardName = req.params.name
     const cardId = req.params.cardId
@@ -45,7 +45,7 @@ router.post('/catalog/:name/:cardId/edit', async (req, res) => {
     }
 })
 
-router.get('/catalog/:name/:cardId/delete', async (req, res) => {
+router.get('/catalog/:name/:cardId/delete', isAuth, async (req, res) => {
     const cardId = req.params.cardId
     try {
         await catalogService.delete(cardId)
@@ -58,7 +58,7 @@ router.get('/catalog/:name/:cardId/delete', async (req, res) => {
 
 })
 
-router.post('/catalog/:cardName/:cardId/comments', async (req, res) => {
+router.post('/catalog/:cardName/:cardId/comments', isAuth, async (req, res) => {
 
     const { cardName, cardId } = req.params
     const { message } = req.body
