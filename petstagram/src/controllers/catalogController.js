@@ -62,12 +62,12 @@ router.post('/catalog/:cardName/:cardId/comments', async (req, res) => {
     const { cardName, cardId } = req.params
     const { message } = req.body
     const userId = req.user._id
-   
+
     try {
         await catalogService.addComment(cardId, { userId, message })
         res.redirect(`/catalog/${cardName}/${cardId}`)
     } catch (err) {
-console.log(err.message)
+        res.render('photos/details', { error: 'Unsuccessful Comment post!' })
     }
 
 })
