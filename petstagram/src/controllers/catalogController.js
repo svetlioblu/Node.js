@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const catalogService = require('../services/catalogService')
 const { getErrorMessage } = require('../utils/errorHelpers')
+const { isAuth } = require('../middlewears/authMiddlewear')
 
 router.get('/catalog', async (req, res) => {
     const cards = await catalogService.getAll().lean()
@@ -72,7 +73,7 @@ router.post('/catalog/:cardName/:cardId/comments', async (req, res) => {
 
 })
 
-router.get('/users/profile', async (req, res) => {
+router.get('/users/profile', isAuth, async (req, res) => {
     const userId = req.user._id
     try {
         const userPosts = await catalogService.getOneUserCards(userId).lean()
