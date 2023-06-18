@@ -7,15 +7,15 @@ router.get('/login', (req, res) => {
     res.render('users/login')
 })
 router.post('/login', async (req, res) => {
-    const { username, password } = req.body
+    const { email, password } = req.body
     try {
-        const token = await userService.login(username, password)
+        const token = await userService.login(email, password)
         res.cookie('auth', token, { httpOnly: true })
 
         res.redirect('/')
     } catch (err) {
 
-        res.render('users/login', { error: getErrorMessage(err), username, password })
+        res.render('users/login', { error: getErrorMessage(err), email, password })
     }
 })
 
@@ -25,9 +25,10 @@ router.get('/register', (req, res) => {
     res.render('users/register')
 })
 router.post('/register', async (req, res) => {
-    const { username, email, password, repeatPassword } = req.body
+    const { email, password, repeatPassword } = req.body
+    console.log(email, password, repeatPassword)
     try {
-        const token = await userService.register({ username, email, password, repeatPassword })
+        const token = await userService.register({ email, password, repeatPassword })
         //automatic login on register
         res.cookie('auth', token, { httpOnly: true })
         res.redirect('/')

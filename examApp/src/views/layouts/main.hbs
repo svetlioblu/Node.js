@@ -1,89 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="icon" type="image/x-icon" href="/images/free-30-instagram-stories-icons23_122570.png">
-    <title>Petstagram</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <title>Home Page</title>
 </head>
 
 <body>
-{{#if error}}
+    {{#if error}}
     <div>
         <div class="errorContainer">
             <p>{{error}}</p>
         </div>
     </div>
-{{/if}}
-    <header>
-        <nav class="navbar">
-            <div class="container">
-                <div class="logo">
-                    <!-- Link to Home Page -->
-                    <a href="/">
-                        <img width="50px" src="/images/free-30-instagram-stories-icons23_122570.png" alt="img1">
-                    </a>
-
-                    <a class="home" href="/">
-                        <i>Petstagram</i>
-                    </a>
+    {{/if}}
+    <div id="wrapper">
+        <header>
+            <!-- Navigation -->
+            <nav>
+                <div>
+                    <a href="/">Home</a>
+                    <a href="#">Dashboard</a>
+                    <a href="#">Search</a>
                 </div>
 
-                <div class="nav-links">
-                    <ul class="nav-group">
-                        <li class="nav-item">
-
-                            <a href="#">
-                                <i>Catalog</i>
-                            </a>
-                        </li>
-                        {{#if isAuthenticated}}
-                        <!--For login users-->
-                        <li class="nav-item">
-                            <a href="#">
-                                <i>Add Photo</i>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#">
-                                <i>Profile</i>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="/users/logout">
-                                <i>Logout</i>
-                            </a>
-                        </li>
-                        {{else}}
-                        <!--For Guest User-->
-                        <li class="nav-item">
-                            <a href="/users/login">
-                                <i>Login</i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/users/register">
-                                <i>Register</i>
-                            </a>
-                        </li>
-                        {{/if}}
-                    </ul>
+                <!-- Logged-in users -->
+                {{#if isAuthenticated}}
+                <div class="user">
+                    <a href="#">Add Animal</a>
+                    <a href="/users/logout">Logout</a>
                 </div>
-            </div>
-        </nav>
-    </header>
+                {{else}}
+                <!-- Guest users -->
+                <div class="guest">
+                    <a href="/users/login">Login</a>
+                    <a href="/users/register">Register</a>
+                </div>
+                {{/if}}
+            </nav>
+        </header>
 
-    {{{body}}}
+        {{{body}}}
 
-    <div class="footer">
-        <span class="footer-section">
-            © 2023 SoftUni Back-End Exam
-        </span>
+        <footer>
+            <p>@Friendly World</p>
+        </footer>
     </div>
-
 </body>
 
 </html>
