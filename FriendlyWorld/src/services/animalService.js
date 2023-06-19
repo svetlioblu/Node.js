@@ -13,3 +13,6 @@ exports.getOne = (animalId) => {
 exports.edit = (animalId, editData) => {
     return Animal.findByIdAndUpdate(animalId, editData)
 }
+exports.delete = (animalId) => {
+    return Animal.findByIdAndDelete(animalId)
+}

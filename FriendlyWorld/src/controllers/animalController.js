@@ -45,7 +45,7 @@ router.get('/dashboard/:animalId/details', async (req, res) => {
     }
 })
 
-//GET Edit
+//GET EDIT
 router.get('/dashboard/:animalId/edit', isAuth, async (req, res) => {
     const animalId = req.params.animalId
     try {
@@ -70,8 +70,18 @@ router.post('/dashboard/:animalId/edit', isAuth, async (req, res) => {
         res.render('edit', { error: getErrorMessage(err) })
     }
 })
+//POST DELETE
+router.get('/dashboard/:animalId/delete', isAuth, async (req, res) => {
+    try {
+        await animalService.delete(req.params.animalId)
+        res.redirect('/dashboard')
+    } catch (err) {
+        res.render('dashboard', { error: getErrorMessage(err) })
+    }
 
+})
 
+//GET SEARCH
 router.get('/search', (req, res) => {
     res.render('search')
 })
