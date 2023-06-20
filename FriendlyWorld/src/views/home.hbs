@@ -7,13 +7,13 @@
             suffering, rescues animals in need and protects them. Our vision is a world where humans treat
             animals with respect, empathy and understanding.</h3>
     </section>
-    {{#each lastPostedAnimals}}
+    {{#each latestUploadedAnuimals}}
     <section id="last-added">
         <div>
-            <img src="/images/animal4.jpg">
-            <p>Name: Blue</p>
-            <p>Need of: Medicine</p>
-            <a class="details-btn" href="#">Details</a>
+            <img src="{{image}}">
+            <p>Name: {{name}}</p>
+            <p>Need of:{{need}}</p>
+            <a class="details-btn" href="/dashboard/{{_id}}/details">Details</a>
         </div>
         {{else}}
         <p class="no-post">There are no animals in need!</p>

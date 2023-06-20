@@ -30,7 +30,7 @@ router.get('/dashboard', async (req, res) => {
         res.render('dashboard', { error: getErrorMessage(err) })
     }
 })
-
+// Details
 router.get('/dashboard/:animalId/details', async (req, res) => {
     const animalId = req.params.animalId
     try {
