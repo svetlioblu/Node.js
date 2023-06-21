@@ -2,6 +2,11 @@ const express = require('express')
 const app = express()
 const routes = require('./routes')
 const cors = require('cors')
+const mongoose = require('mongoose')
+
+mongoose.connect('mongodb://127.0.0.1:27017/furnitures')
+    .then(() => { console.log('DB Connected') })
+    .catch(err => console.log(err))
 
 // This parse query strings. can use both middlewears
 app.use(express.urlencoded({ extended: false }))
