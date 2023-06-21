@@ -3,30 +3,31 @@ const mongoose = require('mongoose')
 const furnitureSchema = new mongoose.Schema({
     make: {
         type: String,
-        required:true
+        required: true
     },
     model: {
         type: String,
-        required:true
+        required: true
     },
     year: {
         type: Number,
-        required:true
+        required: true
     },
     description: {
         type: String,
-        required:true
+        required: true
     },
     price: {
-        type: Number
+        type: Number,
+        required: true
     },
-    image: {
+    img: {
         type: String,
-        required:true
+        required: true
     },
     material: {
         type: String,
-        required:true
+        required: true
     }
 })
 
