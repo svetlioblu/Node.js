@@ -9,10 +9,22 @@ router.post('/register', async (req, res) => {
         const user = await userService.register({ email, password })
 
         res.json({
+            _id: user._id,
             email: user.email,
-            AuthToken: 'noToken',
-            UserId: user._id,
+            accessToken: 'noToken',
         })
+    } catch (err) {
+        console.log(err)
+        res.status(400).json({
+            message: 'Some Error'
+        })
+    }
+})
+
+router.post('/login', async (req, res) => {
+    try {
+        const result = await userService.login(req.body)
+        res.json(result)
     } catch (err) {
         console.log(err)
         res.status(400).json({
