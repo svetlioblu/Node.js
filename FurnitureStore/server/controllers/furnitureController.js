@@ -37,7 +37,14 @@ router.get('/:furnitureId', async (req, res) => {
     } catch (err) {
         res.status(400).json({ error: error.message })
     }
-}
-)
+})
 
+router.put('/:furnitureId', async (req, res) => {
+    try {
+        const updatedFurniture = await furnitureService.update(req.params.furnitureId, req.body)
+        res.json(updatedFurniture)
+    } catch (err) {
+        res.status(400).json({ error: error.message })
+    }
+})
 module.exports = router
