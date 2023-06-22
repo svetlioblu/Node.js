@@ -4,7 +4,7 @@ const furnitureService = require('../services/furnitureService')
 
 router.get('/', async (req, res) => {
     try {
-        const furnitures = await furnitureService.getAll()
+        const furnitures = await furnitureService.getAll(req.query)
 
         res.status(200).json(furnitures)
     } catch (err) {
