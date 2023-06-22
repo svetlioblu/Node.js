@@ -8,3 +8,6 @@ exports.getOne = (ownerId) => Furniture.findById(ownerId)
 
 exports.update = (furnitureId, data) => Furniture.findByIdAndUpdate(furnitureId, data)
 
+exports.delete = (furnitureId) => Furniture.findByIdAndDelete(furnitureId)
+
+

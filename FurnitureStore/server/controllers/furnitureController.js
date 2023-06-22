@@ -42,7 +42,16 @@ router.get('/:furnitureId', async (req, res) => {
 router.put('/:furnitureId', async (req, res) => {
     try {
         const updatedFurniture = await furnitureService.update(req.params.furnitureId, req.body)
-        res.json(updatedFurniture)
+        res.status(204).end()
+    } catch (err) {
+        res.status(400).json({ error: error.message })
+    }
+})
+
+router.delete('/:furnitureId', async (req, res) => {
+    try {
+         await furnitureService.delete(req.params.furnitureId)
+       res.status(204).end()
     } catch (err) {
         res.status(400).json({ error: error.message })
     }
