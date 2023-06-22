@@ -6,7 +6,8 @@ exports.auth = (req, res, next) => {
     if (token) {
         try {
             const decodedToken = jwt.verify(token, 'SECRETsecret')
-            res.user = decodedToken
+            req.user = decodedToken
+         
             next()
 
         } catch (err) {
