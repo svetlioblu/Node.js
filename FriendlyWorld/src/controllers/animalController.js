@@ -95,7 +95,7 @@ router.get('/dashboard/:animalId/donation', isAuth, async (req, res) => {
 
 //GET SEARCH
 router.get('/search', async (req, res) => {
-    const searchQuery = req.query.search
+    const searchQuery = req.query.search.trim()
     try {
         const searchResults = await animalService.search(searchQuery)
         res.render('search', {searchResults})
