@@ -7,7 +7,7 @@ exports.getAll = () => {
 }
 
 exports.getOne = (animalId) => {
-    return Animal.findById(animalId).populate('owner')
+    return Animal.findById(animalId)
 }
 
 exports.edit = (animalId, editData) => {
@@ -19,7 +19,12 @@ exports.delete = (animalId) => {
 
 exports.donate = async (animalId, ownerId) => {
     const currentDonatedAnimal = await Animal.findById(animalId)
-    currentDonatedAnimal.donations.push({ user:ownerId })
-    currentDonatedAnimal.save()
- return
+    const isDonated = currentDonatedAnimal.donations.find(x => x.user == ownerId)
+    if (!isDonated) {
+        currentDonatedAnimal.donations.push({ user: ownerId })
+        currentDonatedAnimal.save()
+        return isDonated
+    } else {
+        throw new Error('You can donate only once for that Animal!')
+    }
 }

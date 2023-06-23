@@ -34,12 +34,12 @@ router.get('/dashboard', async (req, res) => {
 router.get('/dashboard/:animalId/details', async (req, res) => {
     const animalId = req.params.animalId
     try {
-        const oneAnimal = await animalService.getOne(animalId).populate('donations.user').lean()
+        const oneAnimal = await animalService.getOne(animalId).lean()
 
         const isOwner = req.user?._id == oneAnimal.owner._id
-        const isNotOwner = req.user?._id != oneAnimal.owner._id
-
-        res.render('details', { oneAnimal, isOwner, isNotOwner })
+        const isDonate = oneAnimal.donations.find(x => x.user == req.user?._id)
+        
+        res.render('details', { oneAnimal, isOwner, isDonate })
     } catch (err) {
         res.render('details', { error: getErrorMessage(err) })
     }
@@ -85,8 +85,8 @@ router.get('/dashboard/:animalId/delete', isAuth, async (req, res) => {
 router.get('/dashboard/:animalId/donation', isAuth, async (req, res) => {
     try {
         const animalId = req.params.animalId
-        await animalService.donate(animalId, req.user._id)
-        
+        const donate = await animalService.donate(animalId, req.user._id)
+
         res.redirect(`/dashboard/${animalId}/details`)
     } catch (err) {
         res.render('details', { error: getErrorMessage(err) })
