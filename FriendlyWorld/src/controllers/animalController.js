@@ -38,7 +38,7 @@ router.get('/dashboard/:animalId/details', async (req, res) => {
 
         const isOwner = req.user?._id == oneAnimal.owner._id
         const isDonate = oneAnimal.donations.find(x => x.user == req.user?._id)
-        
+
         res.render('details', { oneAnimal, isOwner, isDonate })
     } catch (err) {
         res.render('details', { error: getErrorMessage(err) })
@@ -94,7 +94,13 @@ router.get('/dashboard/:animalId/donation', isAuth, async (req, res) => {
 })
 
 //GET SEARCH
-router.get('/search', (req, res) => {
-    res.render('search')
+router.get('/search', async (req, res) => {
+    const searchQuery = req.query.search
+    try {
+        const searchResults = await animalService.search(searchQuery)
+        res.render('search', {searchResults})
+    } catch (err) {
+        res.render('search', { error: getErrorMessage(err) })
+    }
 })
 module.exports = router 

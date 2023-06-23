@@ -28,3 +28,8 @@ exports.donate = async (animalId, ownerId) => {
         throw new Error('You can donate only once for that Animal!')
     }
 }
+
+exports.search = async (searchQuery) => {
+    const regex = new RegExp(searchQuery, 'i')
+    return await Animal.find({ location: regex}).lean()
+}
