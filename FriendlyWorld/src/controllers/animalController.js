@@ -78,7 +78,19 @@ router.get('/dashboard/:animalId/delete', isAuth, async (req, res) => {
     } catch (err) {
         res.render('dashboard', { error: getErrorMessage(err) })
     }
+})
 
+//DONATION
+
+router.get('/dashboard/:animalId/donation', isAuth, async (req, res) => {
+    try {
+        const animalId = req.params.animalId
+        await animalService.donate(animalId, req.user._id)
+        
+        res.redirect(`/dashboard/${animalId}/details`)
+    } catch (err) {
+        res.render('details', { error: getErrorMessage(err) })
+    }
 })
 
 //GET SEARCH
