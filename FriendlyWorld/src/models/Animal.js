@@ -33,11 +33,16 @@ const animalSchema = new mongoose.Schema({
     },
     location: {
         type: String,
-        required: [true, 'Location is required !']
+        required: [true, 'Location is required !'],
+        minLength: [5, 'The location has to be at least 5 chars !'],
+        maxLength: [15, 'The location has to be max 15 chars !'],
+
     },
     description: {
         type: String,
-        required: [true, 'Description is required !']
+        required: [true, 'Description is required !'],
+        minLength: [5, 'The description has to be at least 5 chars !'],
+        maxLength: [50, 'The description has to be max 50 chars !'],
     },
     donations: [
         {
