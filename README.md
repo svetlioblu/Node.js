@@ -31,7 +31,17 @@ Authenticated users can log Out <br>
 All users can accsess the details page and the dashboard<br>
 Photo Owners can edit and delete it <br>
 NON Photo Owners and authenticated can donate <br>
-All can Search from dedicated view <br>
+All can Search from dedicated view by location <br>
 The home view dinamically shows the last 3 photos
 Error handling showing the firts error on the current view<br>
-
+## FurnitureStore Restful server
+***Functionlaity*** <br>
+Handle requests using the restful stqndard.Return JSON responces <br>
+User authentication and authorization <br>
+Guest users can login or register <br>
+Authenticated users can log Out <br>
+All users can accsess the details page and the dashboard<br>
+Furniture post Owners can edit and delete it <br>
+All can Search from dedicated view <br>
+Profile view<br>
+Error handling showing the firts error on the current view<br>
